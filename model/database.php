@@ -1,9 +1,14 @@
 <?php
 class Database {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $password = '';
-    private $database = 'teelab';
+    // private $host = 'localhost';
+    // private $user = 'root';
+    // private $password = '';
+    // private $database = 'teelab';
+
+    private $host = 'sql204.infinityfree.com';
+    private $user = 'if0_35667095';
+    private $password = 'DiHKBpvtLox';
+    private $database = 'if0_35667095_the_last_dtb';
 
     private $conn;
     
