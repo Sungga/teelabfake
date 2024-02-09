@@ -144,12 +144,17 @@ class admin {
 
         $result = $this->db->exec($sql);
 
-        if($result) {
-            // Thêm ảnh mô tả
-            // $sql = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 1";
-            // $result = $this->db->getRow($sql);
-            // $product_id = $result['product_id'];
+        
 
+        if($result) {
+            // lay product id vừa tạo để thực hiện thêm ảnh mô tả và màu
+            $sql = "SELECT * FROM tbl_product
+            ORDER BY product_id DESC
+            LIMIT 1";
+            $product = $this->db->getRow($sql);
+            $product_id = $product['product_id'];
+
+            // Thêm ảnh mô tả
             $filename = $_FILES['product_img_desc']['name'];
             $filetmp = $_FILES['product_img_desc']['tmp_name'];
 

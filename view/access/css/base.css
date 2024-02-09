@@ -56,43 +56,35 @@ li {
 
 
 
-input[type="radio"] + label.yellow,
-input[type="checkbox"] + label.yellow {
+input[type="radio"] + label.yellow {
     background-color: yellow;
 }
 
-input[type="radio"] + label.green,
-input[type="checkbox"] + label.green {
+input[type="radio"] + label.green {
     background-color: green;
 }
 
-input[type="radio"] + label.pink,
-input[type="checkbox"] + label.pink {
+input[type="radio"] + label.pink {
     background-color: pink;
 }
 
-input[type="radio"] + label.red,
-input[type="checkbox"] + label.red {
+input[type="radio"] + label.red {
     background-color: red;
 }
 
-input[type="radio"] + label.gray,
-input[type="checkbox"] + label.gray {
+input[type="radio"] + label.gray {
     background-color: gray;
 }
 
-input[type="radio"] + label.white,
-input[type="checkbox"] + label.white {
+input[type="radio"] + label.white {
     background-color: white;
 }
 
-input[type="radio"] + label.brown,
-input[type="checkbox"] + label.brown {
+input[type="radio"] + label.brown {
     background-color: brown;
 }
 
-input[type="radio"] + label.black,
-input[type="checkbox"] + label.black {
+input[type="radio"] + label.black {
     background-color: black;
 }
 

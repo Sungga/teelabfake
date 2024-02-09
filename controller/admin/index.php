@@ -163,10 +163,10 @@ switch($page) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if($db->addProduct($_POST, $_FILES)) {
                 echo "<script>alert('Thêm dữ liệu thành công!')</script>";
-                header('Location: ./index.php?controller=admin&page=list_product');
+                echo '<script>window.location.href = "./index.php?controller=admin&page=list_product";</script>';
             }
             else {
-                echo "<script>alert('Thêm dữ liệu không thành công!')</script>";
+                echo '<script>window.location.href = "./index.php?controller=admin&page=list_product";</script>';   
             }
         }
 

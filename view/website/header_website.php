@@ -16,15 +16,15 @@
             <div class="header__container">
                 <div class="header__left">
                     <?php
-                    foreach ($categories as $category) {
+                    foreach ($categories as $category_item) {
                     ?>
                         <div class="header__left--category">
-                            <p><?php echo $category['category_name'] ?></p>
+                            <p><?php echo $category_item['category_name'] ?></p>
                             <ul>
                                 <?php
                                 $arr = array();
-                                foreach ($product_types as $product_type) {
-                                    if ($category['category_id'] == $product_type['category_id']) $arr[] = $product_type;
+                                foreach ($product_types as $product_type_item) {
+                                    if ($category_item['category_id'] == $product_type_item['category_id']) $arr[] = $product_type_item;
                                 }
                                 $count = 0;
                                 for($j = 0; $j < count($arr);) {
@@ -68,7 +68,7 @@
                     <div class="header__right--icon header__right--user">
                         <a src="#" class="fa-solid fa-user"></a>
                         <div class="header__right--func">
-                            <a href="#">Quản lý</a>
+                            <a href="./index.php?controller=admin&page">Quản lý</a>
                             <a href="#">Tài khoản</a>
                             <a href="#">Đăng xuất</a>
                             <a href="#">Đăng nhập</a>

@@ -349,6 +349,7 @@
 }
 
 /* -----------------------------------------------------<< LIST PRODUCT >>----------------------------------------------------- */
+/* -----------------------------------------------------<< LIST PRODUCT >>----------------------------------------------------- */
 .list-product__container {
     margin: 40px 0;
     display: flex;
@@ -501,6 +502,8 @@
     margin: 16px 16px;
     border-bottom-right-radius: 12px;
     cursor: pointer;
+    padding: 8px 8px 0;
+    border: 1px solid #ccc;
     
     position: relative;
 }
@@ -523,6 +526,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 2;
+
 }
 
 .list-product__product--name h4 {
@@ -530,6 +534,61 @@
     font-size: 14px;
     font-weight: 400;
     color: var(--color-bold);
+}
+
+.list-product__product--color {
+    width: 60%;
+    /* overflow: hidden; */
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+
+    margin-bottom: 4px;
+}
+
+.list-product__product--color p {
+    user-select: none;
+}
+
+.list-product__product--color input[class="list-product__color"] {
+    display: none;
+}
+
+/* Thiết lập kiểu của label để tạo ra một giao diện tương tác như nút radio */
+.list-product__product--color input[class="list-product__color"] + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 0%;
+    cursor: pointer;
+    border: 1px solid #ccc;
+
+    /* margin-right: 4px; */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Khi nút radio được chọn, thay đổi kích thước của label */
+.list-product__product--color input[class="list-product__color"]:checked + label {
+    height: 30px;
+}
+
+.list-product__product--left-color,
+.list-product__product--right-color {
+    width: 80%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.list-product__product--left-color label,
+.list-product__product--right-color label {
+    margin-right: 8px;
+}
+
+.list-product__product--right-color {
+    display: none;
 }
 
 .list-product__product--price {
@@ -581,7 +640,7 @@
 .list-product__product--size {
     opacity: 0;
     visibility: inherit;
-    /* display: none; */
+    display: none;
     position: absolute;
     bottom: 34px;
     right: 0;
@@ -785,7 +844,7 @@ input[name="color"] + label {
     transition: all 0.3s ease-in-out;
 }
 
-/* Khi nút radio được chọn, thay đổi màu nền của label */
+/* Khi nút radio được chọn, thay đổi kích thước của label */
 input[name="color"]:checked + label {
     width: 30px;
     height: 30px;
@@ -1444,4 +1503,37 @@ input[name="color"]:checked + label {
 .admin__right form select {
     padding: 8px;
     font-size: 14px;
+}
+
+/* ----------------------------------------------<< ADD PRODUCT >>-------------------------------------------------------- */
+.admin__right input[type="checkbox"] + label.yellow {
+    background-color: yellow;
+}
+
+.admin__right input[type="checkbox"] + label.green {
+    background-color: green;
+}
+
+.admin__right input[type="checkbox"] + label.pink {
+    background-color: pink;
+}
+
+.admin__right input[type="checkbox"] + label.red {
+    background-color: red;
+}
+
+.admin__right input[type="checkbox"] + label.gray {
+    background-color: gray;
+}
+
+.admin__right input[type="checkbox"] + label.white {
+    background-color: white;
+}
+
+.admin__right input[type="checkbox"] + label.brown {
+    background-color: brown;
+}
+
+.admin__right input[type="checkbox"] + label.black {
+    background-color: black;
 }

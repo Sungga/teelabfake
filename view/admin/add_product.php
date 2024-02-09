@@ -30,6 +30,7 @@
                         <input type="file" name="product_img_desc[]" id="" multiple>
                         <label for="quantity">Số lượng sản phẩm</label>
                         <input type="number" name="product_quantity" id="">
+
                         <div>
                                 <input type="checkbox" id="yellow" name="yellow" checked>
                                 <label class="yellow" for="yellow"></label>
