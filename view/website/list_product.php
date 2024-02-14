@@ -111,105 +111,129 @@
                     </div>
                     
                     <div class="list-product__right--center">
-                    <?php
-                    foreach($products as $product_item) {
-                    ?>
-                        <div class="list-product__product">
-                            <div class="list-product__product--img">
-                                <a href="./index.php?controller=website&page=product&product_id=<?php echo $product_item['product_id'] ?>">
-                                    <img src="./model/uploads/<?php echo $product_item['product_img'] ?>" alt="">
-                                </a>
-                            </div>
-                            <div class="list-product__product--name">
-                                <h4><?php echo $product_item['product_name'] ?></h4>
-                            </div>
-                            <form>
-                                <div class="list-product__product--color">
-                                    <?php
-                                    $arr = array(); 
-                                    foreach($colors as $color_item) {
-                                        if($color_item['product_id'] == $product_item['product_id']) $arr[] = $color_item;
-                                    }
+                        <?php
+                        $numberOfProduct = count($products);
+                        $productsPerPage = 16;
+                        $numberOfPage = ceil($numberOfProduct / $productsPerPage);
 
-                                    if(count($arr) <= 4) {
-                                    ?>
-                                        <div class="list-product__product--left-color">
-                                    <?php
-                                        foreach($arr as $item) {
-                                    ?>
-                                            <input type="radio" class="list-product__color" id="<?php echo $item['product_color'] ?>_<?php echo $item['product_id'] ?>" name="color_product_<?php echo $item['product_id'] ?>">
-                                            <label class="<?php echo $item['product_color'] ?>" for="<?php echo $item['product_color'] ?>_<?php echo $item['product_id'] ?>"></label>
-                                    <?php
-                                        }
-                                    ?>
-                                        </div>
-                                    <?php
-                                    ?>
-                                        <div style="display: none;" class="list-product__product--right-color"></div>
-                                        <p style="display: none;">&#8594;</p>
-                                    <?php
-                                    }
-                                    else {
-                                    ?>
-                                        <div class="list-product__product--left-color">
-                                    <?php
-                                        for($i = 0; $i < 4; $i++) {
-                                    ?>
-                                            <input type="radio" class="list-product__color" id="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>" name="color_product_<?php echo $arr[$i]['product_id'] ?>">
-                                            <label class="<?php echo $arr[$i]['product_color'] ?>" for="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>"></label>
-                                    <?php
-                                        }
-                                    ?>
-                                        </div>
-                                        <div class="list-product__product--right-color">
-                                    <?php
-                                        for($i = 4; $i < count($arr); $i++) {
-                                    ?>
-                                            <input type="radio" class="list-product__color" id="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>" name="color_product_<?php echo $arr[$i]['product_id'] ?>">
-                                            <label class="<?php echo $arr[$i]['product_color'] ?>" for="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>"></label>
-                                    <?php
-                                        }
-                                    ?>
-                                        </div>
-                                        <p>&#8594;</p>
-                                    <?php
-                                    }
-                                    ?>
-                                    
+                        if($_GET['p'] > $numberOfPage) {
+                            echo "<script>alert('Không có dữ liệu ở trang này');</script>";
+                        }
+                        else {
+                            $product_start = 16 * $_GET['p'] - 16; //tru 16 vi san pham sau tien bat dau tu 0
+                            if($_GET['p'] == $numberOfPage) {
+                                $product_end = $numberOfProduct % 16 + $product_start - 1;
+                            }
+                            else {
+                                $product_end = 16 * $_GET['p'] - 1;
+                            }
+                            for($index = $product_start; $index <= $product_end; $index++) {
+                        ?>
+                                <div class="list-product__product">
+                                    <div class="list-product__product--img">
+                                        <a href="./index.php?controller=website&page=product&product_id=<?php echo $products[$index]['product_id'] ?>">
+                                            <img src="./model/uploads/<?php echo $products[$index]['product_img'] ?>" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="list-product__product--name">
+                                        <h4><?php echo $products[$index]['product_name'] ?></h4>
+                                    </div>
+                                    <form method="POST">
+                                        <div class="list-product__product--color">
+                                            <?php
+                                            $arr = array(); 
+                                            foreach($colors as $color_item) {
+                                                if($color_item['product_id'] == $products[$index]['product_id']) $arr[] = $color_item;
+                                            }
 
-                                    
-                                    
+                                            if(count($arr) <= 4) {
+                                            ?>
+                                                <div class="list-product__product--left-color">
+                                            <?php
+                                                foreach($arr as $item) {
+                                            ?>
+                                                    <input type="radio" value="<?php echo $item['product_color'] ?>" class="list-product__color" id="<?php echo $item['product_color'] ?>_<?php echo $item['product_id'] ?>" name="color_product_<?php echo $item['product_id'] ?>" checked>
+                                                    <label class="<?php echo $item['product_color'] ?>" for="<?php echo $item['product_color'] ?>_<?php echo $item['product_id'] ?>"></label>
+                                            <?php
+                                                }
+                                            ?>
+                                                </div>
+                                            <?php
+                                            ?>
+                                                <div style="display: none;" class="list-product__product--right-color"></div>
+                                                <p style="display: none;">&#8594;</p>
+                                            <?php
+                                            }
+                                            else {
+                                            ?>
+                                                <div class="list-product__product--left-color">
+                                            <?php
+                                                for($i = 0; $i < 4; $i++) {
+                                            ?>
+                                                    <input type="radio" value="<?php echo $arr[$i]['product_color'] ?>" class="list-product__color" id="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>" name="color_product_<?php echo $arr[$i]['product_id'] ?>" checked>
+                                                    <label class="<?php echo $arr[$i]['product_color'] ?>" for="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>"></label>
+                                            <?php
+                                                }
+                                            ?>
+                                                </div>
+                                                <div class="list-product__product--right-color">
+                                            <?php
+                                                for($i = 4; $i < count($arr); $i++) {
+                                            ?>
+                                                    <input type="radio" value="<?php echo $arr[$i]['product_color'] ?>" class="list-product__color" id="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>" name="color_product_<?php echo $arr[$i]['product_id'] ?>">
+                                                    <label class="<?php echo $arr[$i]['product_color'] ?>" for="<?php echo $arr[$i]['product_color'] ?>_<?php echo $arr[$i]['product_id'] ?>"></label>
+                                            <?php
+                                                }
+                                            ?>
+                                                </div>
+                                                <p>&#8594;</p>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <div class="list-product__product--price">
+                                            <strong><?php echo $products[$index]['product_price_new'] ?>₫</strong>
+                                            <span><?php echo $products[$index]['product_price'] ?>₫</span>
+                                        </div>
+                                        <input type="text" name="product_id" id="" style="display: none;" value="<?php echo $products[$index]['product_id'] ?>">
+                                        <div class="list-product__product--cart">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                                <ul class="list-product__product--size">
+                                                    <li><input type="submit" name="size" value="M"></li>
+                                                    <li><input type="submit" name="size" value="S"></li>
+                                                    <li><input type="submit" name="size" value="L"></li>
+                                                    <li><input type="submit" name="size" value="XL"></li>
+                                                    <li><input type="submit" name="size" value="XXL"></li>
+                                                </ul>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="list-product__product--price">
-                                    <strong><?php echo $product_item['product_price_new'] ?>₫</strong>
-                                    <span><?php echo $product_item['product_price'] ?>₫</span>
-                                </div>
-                                <div class="list-product__product--cart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                        <ul class="list-product__product--size">
-                                            <li><input type="submit" name="size" value="M"></li>
-                                            <li><input type="submit" name="size" value="S"></li>
-                                            <li><input type="submit" name="size" value="L"></li>
-                                            <li><input type="submit" name="size" value="XL"></li>
-                                            <li><input type="submit" name="size" value="XXL"></li>
-                                        </ul>
-                                </div>
-                            </form>
-                        </div>
-                    <?php
-                    }
-                    ?>
+                        <?php
+                            }    
+                        }
+                        ?>
                     </div>
+                    
                     
                     <div class="list-product__right--bottom">
                         <form action="" method="get">
-                            <input type="submit" value="&#60;">
-                            <input type="submit" value="1" class="focus">
-                            <input type="submit" value="2">
-                            <input type="submit" value="3">
-                            <input type="submit" value="4">
-                            <input type="submit" value="5">
-                            <input type="submit" value="&#62;">
+                            <!-- <input type="submit" value="&#60;"> -->
+                            <?php
+                            for($i = 1; $i <= $numberOfPage; $i++) {
+                                if($_GET['p'] == $i) {
+                            ?>
+                                    <a href="./index.php?controller=website&page=product_type&product_type_id=<?php echo $product_type['product_type_id'] ?>&p=<?php echo $i ?>" class="focus"><?php echo $i ?></a>
+                            <?php
+                                }
+                                else {
+                            ?>
+                                    <a href="./index.php?controller=website&page=product_type&product_type_id=<?php echo $product_type['product_type_id'] ?>&p=<?php echo $i ?>"><?php echo $i ?></a>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <!-- <input type="submit" value="&#62;"> -->
                         </form>
                     </div>
                 </div>

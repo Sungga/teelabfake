@@ -56,10 +56,10 @@ imgSmall.forEach(function(img, index) {
 function increment() {
     let numberInput = document.getElementById('numberInput');
     let currentValue = parseInt(numberInput.value);
-    let newValue = currentValue + 1;
-
+    
     // Kiểm tra điều kiện max trước khi tăng giá trị
-    if (currentValue < parseInt(numberInput.max)) {
+    if (currentValue != parseInt(numberInput.max)) {
+        let newValue = currentValue + 1;
         numberInput.value = newValue;
     }
 }
@@ -70,7 +70,7 @@ function decrement() {
     let currentValue = parseInt(numberInput.value);
 
     // Kiểm tra điều kiện min trước khi giảm giá trị
-    if (currentValue > parseInt(numberInput.min)) {
+    if (currentValue != parseInt(numberInput.min)) {
         let newValue = currentValue - 1;
         numberInput.value = newValue;
     }
@@ -93,10 +93,42 @@ function toggleDescriptionExpansion() {
     }
 }
 
-// Thay đổi tên màu khi lick vào các loại màu khác nhau
+// Hiện thị tên màu đâu tiên khi mở trang đã được checked
 let inputColor = document.querySelectorAll('input[name="color"]');
 let colorName = document.querySelector('.product__color p');
 
+switch (inputColor[0].id) {
+    case 'yellow':
+        colorName.textContent = 'Màu sắc: Vàng';
+        break;
+    case 'green':
+        colorName.textContent = 'Màu sắc: Xanh';
+        break;
+    case 'pink':
+        colorName.textContent = 'Màu sắc: Hồng';
+        break;
+    case 'red':
+        colorName.textContent = 'Màu sắc: Đỏ';
+        break;
+    case 'gray':
+        colorName.textContent = 'Màu sắc: Xám';
+        break;
+    case 'white':
+        colorName.textContent = 'Màu sắc: Trắng';
+        break;
+    case 'brown':
+        colorName.textContent = 'Màu sắc: Nâu';
+        break;
+    case 'black':
+        colorName.textContent = 'Màu sắc: Đen';
+        break;
+    default:
+        colorName.textContent = '';
+        break;
+}
+
+
+// Thay đổi tên màu khi lick vào các loại màu khác nhau
 inputColor.forEach(function(color, index) {
     color.addEventListener("click", function() {
         switch (color.id) {
@@ -129,4 +161,18 @@ inputColor.forEach(function(color, index) {
                 break;
         }
     });
+});
+
+// Hiện thị tiền sản phẩm theo kiểu vnđ
+let productPriceNew = document.querySelectorAll('.product__price strong');
+let productPrice = document.querySelectorAll('.product__price span');
+
+productPriceNew.forEach(function(item, index) {
+    let productPriceNewValue = parseInt(item.textContent);
+    let formattedPriceNew = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productPriceNewValue);
+    item.textContent = formattedPriceNew;
+
+    let productPriceValue = parseInt(productPrice[index].textContent);
+    let formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productPriceValue);
+    productPrice[index].textContent = formattedPrice;
 });

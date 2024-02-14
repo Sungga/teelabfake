@@ -1,3 +1,6 @@
+
+
+
 <div class="admin__right">
                     <form action="" method="post" enctype="multipart/form-data">
                         <label for="category_id">Tên danh mục</label>
@@ -23,7 +26,7 @@
                         <label for="product_price_new">Giá mới</label>
                         <input type="text" name="product_price_new" id="">
                         <label for="product_desc">Mô tả</label>
-                        <textarea name="product_desc" id="" cols="30" rows="20"></textarea>
+                        <textarea name="product_desc" id="textarea" cols="30" rows="20"></textarea>
                         <label for="product_img">Ảnh sản phẩm</label>
                         <input type="file" name="product_img" id="">
                         <label for="product_img_desc">Ảnh mô tả</label>
@@ -119,3 +122,13 @@ document.getElementById("category_id").addEventListener("change", function() {
 });
 </script>
 </html>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#textarea' ) )
+        .catch( error => {
+            console.error( error );
+    } );
+</script>

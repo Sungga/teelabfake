@@ -10,6 +10,11 @@ switch($controller) {
         include "./controller/admin/index.php";
         break;
     }
+
+    case 'common': {
+        include "./controller/common/index.php";
+        break;
+    }
     
     default: {
         include "./controller/website/index.php";

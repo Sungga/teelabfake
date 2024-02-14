@@ -61,7 +61,7 @@ let changeListColor = document.querySelectorAll('.list-product__product--color p
 let listColorLeft = document.querySelectorAll('.list-product__product--left-color');
 let listColorRight = document.querySelectorAll('.list-product__product--right-color');
 
-console.log(changeListColor);
+// console.log(changeListColor);
 
 changeListColor.forEach(function(item, index) {
     item.addEventListener("click", function() {

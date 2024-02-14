@@ -34,7 +34,7 @@
                                 <?php
                                     while($i < 4 && $j < count($arr)) {
                                 ?>
-                                        <a href="./index.php?controller=website&page=product_type&product_type_id=<?php echo $arr[$j]['product_type_id'] ?>"><?php echo $arr[$j]['product_type_name'] ?></a>
+                                        <a href="./index.php?controller=website&page=product_type&product_type_id=<?php echo $arr[$j]['product_type_id'] ?>&p=1"><?php echo $arr[$j]['product_type_name'] ?></a>
                                 <?php
                                         $j++;
                                         $i++;
@@ -68,14 +68,29 @@
                     <div class="header__right--icon header__right--user">
                         <a src="#" class="fa-solid fa-user"></a>
                         <div class="header__right--func">
-                            <a href="./index.php?controller=admin&page">Quản lý</a>
-                            <a href="#">Tài khoản</a>
-                            <a href="#">Đăng xuất</a>
-                            <a href="#">Đăng nhập</a>
+                            <?php
+                            if(isset($_SESSION['user_id'])) {
+                                if($_SESSION['role'] == 1) {
+                            ?>
+                                    <a href="./index.php?controller=admin&page">Quản lý</a>
+                            <?php
+                                }
+                            ?>
+                                <a href="./index.php?controller=common&page=account">Tài khoản</a>
+                                <a href="./index.php?controller=common&page=logout">Đăng xuất</a>
+                            <?php
+                            }
+                            else {
+                            ?>
+                                <a href="./index.php?controller=common&page=signin">Đăng nhập</a>
+                                <a href="./index.php?controller=common&page=signup">Đăng ký</a>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="header__right--icon">
-                        <a href="#" class="fa-solid fa-cart-shopping"></a>
+                        <a href="./index.php?controller=website&page=cart" class="fa-solid fa-cart-shopping"></a>
                     </div>
                 </div>
             </div>

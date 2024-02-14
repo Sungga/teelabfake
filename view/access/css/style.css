@@ -679,18 +679,19 @@
     align-items: center;
 }
 
-.list-product__right--bottom input {
+.list-product__right--bottom a {
     padding: 6px 12px;
     background-color: var(--color-white);
     outline: none;
     border: 1px solid #ccc;
     margin: 0 12px;
     border-radius: 10px 0 10px 0;
+    color: var(--color-bold);
 
     cursor: pointer;
 }
 
-.list-product__right--bottom input.focus {
+.list-product__right--bottom a.focus {
     background-color: var(--color-bold);
     color: var(--color-white);
 }
@@ -820,9 +821,8 @@
 
 .product__color--item {
     height: 30px;
-    width: 300px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
 }
 
@@ -834,6 +834,7 @@ input[name="color"] {
 /* Thiết lập kiểu của label để tạo ra một giao diện tương tác như nút radio */
 input[name="color"] + label {
     display: inline-block;
+    margin-right: 12px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -1000,7 +1001,7 @@ input[name="color"]:checked + label {
 }
 
 .product__right--bottom p {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     font-size: 14px;
     color: var(--color-bold);
 }
