@@ -370,6 +370,71 @@ class admin {
 
         return $result;
     }
+
+    // cho order
+    public function getOrders() {
+        $sql = "SELECT * FROM tbl_order";
+
+        $result = $this->db->getRows($sql);
+
+        return $result;
+    }
+
+    public function processing($order_id) {
+        $sql = "UPDATE tbl_order
+                SET order_check = '1'
+                WHERE order_id='$order_id'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
+
+    public function ship($order_id) {
+        $sql = "UPDATE tbl_order
+                SET order_check = '2'
+                WHERE order_id='$order_id'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
+
+    public function success($order_id) {
+        $sql = "UPDATE tbl_order
+                SET order_check = '3'
+                WHERE order_id='$order_id'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
+
+    public function cancel($order_id) {
+        $sql = "UPDATE tbl_order
+                SET order_check = '4'
+                WHERE order_id='$order_id'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
+
+    public function delete_order($order_id) {
+        $sql = "DELETE FROM tbl_order WHERE order_id = '$order_id'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
+
+    public function delete_orders() {
+        $sql = "DELETE FROM tbl_order WHERE order_check = '4' or order_check = '3'";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
+    }
 }
 
 ?>

@@ -1160,11 +1160,11 @@ input[name="color"]:checked + label {
 }
 
 .cart__left tr td:nth-child(1) {
-    padding: 0;
+    width: 200px;
 }
 
 .cart__left img {
-    width: 200px;
+    width: 100%;
 }
 
 .cart__left a {
@@ -1172,6 +1172,11 @@ input[name="color"]:checked + label {
     font-size: 20px;
     width: 100%;
     text-align: center;
+}
+
+.cart__left select[name="size"],
+.cart__left select[name="size"] option {
+    text-transform: uppercase;
 }
 
 .cart__right {

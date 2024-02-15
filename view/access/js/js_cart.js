@@ -1,6 +1,7 @@
-let quantities = document.querySelectorAll('.cart__left tr td:nth-child(4) input');
-let prices = document.querySelectorAll('.cart__left tr td:nth-child(5)');
-let totalSums = document.querySelectorAll('.cart__left tr td:nth-child(6)');
+let quantities = document.querySelectorAll('.cart__left tr td:nth-child(5) input');
+let prices = document.querySelectorAll('.cart__left tr td:nth-child(6)');
+let totalSums = document.querySelectorAll('.cart__left tr td:nth-child(7) input');
+let select = document.querySelectorAll('.cart__left tr td:nth-child(8) input');
 
 let tongsanpham = document.querySelector('.tongsanpham');
 let tongtienhang = document.querySelector('.tongtienhang');
@@ -11,29 +12,43 @@ const currencyFormatter = new Intl.NumberFormat('vi-VN', {
     currency: 'VND',
 });
 
+// thay doi tong tien hang cho tung san pham
 prices.forEach(function(priceElement) {
     let price = parseFloat(priceElement.textContent.replace(/[^\d]/g, '')); // Loại bỏ tất cả các ký tự không phải số
     priceElement.textContent = currencyFormatter.format(price);
 });
 
+// kiem tra xem san pham day co duoc tick hay khong
+function checkOk(index) {
+    if(select[index].checked) {
+        return true;
+    }
+    return false;
+}
+
+// ham update tong tien hang cho toan bo don hang
 function updateTotal(index) {
     let quantity = parseInt(quantities[index].value);
     let price = parseFloat(prices[index].textContent.replace(/[^\d]/g, '')); // Loại bỏ tất cả các ký tự không phải số
     let totalAmount = quantity * price;
-    totalSums[index].textContent = currencyFormatter.format(totalAmount);
+    totalSums[index].value = currencyFormatter.format(totalAmount);
 
     // tong san pham cho ben right
     let tong1 = 0;
-    quantities.forEach(function(quantity, index) {
-        tong1 += parseInt(quantity.value);   
+    quantities.forEach(function(quantity, indexS) {
+        if(checkOk(indexS)) {
+            tong1 += parseInt(quantity.value);   
+        }
     })
     tongsanpham.innerHTML = tong1;
 
     // tong tien hang cho ben right
     let tong2 = 0;
-    totalSums.forEach(function(totalSum, index) {
-        let total = parseFloat(totalSum.textContent.replace(/[^\d]/g, ''));
-        tong2 += total;
+    totalSums.forEach(function(totalSum, indexS) {
+        if(checkOk(indexS)) {
+            let total = parseFloat(totalSum.value.replace(/[^\d]/g, ''));
+            tong2 += total;
+        }
     });
     tongtienhang.innerHTML = currencyFormatter.format(tong2);
 
@@ -42,10 +57,23 @@ function updateTotal(index) {
     thanhtien.innerHTML = currencyFormatter.format(tong3);
 }
 
+
+// dung` ham update tong tien hang cho toan bo don hang
 totalSums.forEach(function(total, index) {
     updateTotal(index);
 
     quantities[index].addEventListener('input', function() {
         updateTotal(index);
     });
+
+    select[index].addEventListener('input', function() {
+        if(checkOk(index)) {
+            updateTotal(index);
+        }
+        else {
+            updateTotal(index);
+        }
+    });
 });
+
+console.log(select);

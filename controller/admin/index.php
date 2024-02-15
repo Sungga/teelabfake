@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!(isset($_SESSION['role']) && $_SESSION['role'] == 1)) {
+    header('Location: ./index.php');
+    exit(); // Đảm bảo kết thúc quá trình thực thi sau khi chuyển hướng
+}
+
 include "./model/class/class_admin.php";
 $db = new admin();
 
@@ -239,7 +246,81 @@ switch($page) {
         header('Location: ./index.php?controller=admin&page=list_product');
         break;
     }
+
+    // order
+    case 'order': {
+        $orders = $db->getOrders();
+
+        $products = array();
+            foreach($orders as $order_item) {
+                $product = $db->getProduct($order_item['product_id']);
+                $products[] = $product;
+            }
+
+        include "./view/admin/header_admin.php";
+        include "./view/admin/order_management.php";
+
+        break;
+    }
+
+    case 'processing': {
+        if(isset($_GET['order_id'])) {
+            $db->processing($_GET['order_id']);
+        }
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
+
+    case 'ship': {
+        if(isset($_GET['order_id'])) {
+            $db->ship($_GET['order_id']);
+        }
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
+
+    case 'success': {
+        if(isset($_GET['order_id'])) {
+            $db->success($_GET['order_id']);
+        }
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
+
+    case 'cancel': {
+        if(isset($_GET['order_id'])) {
+            $db->cancel($_GET['order_id']);
+        }
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
     
+    case 'delete_order': {
+        if(isset($_GET['order_id'])) {
+            $db->delete_order($_GET['order_id']);
+        }
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
+
+    case 'tick': {
+        $db->delete_orders();
+
+        header('location: ./index.php?controller=admin&page=order');
+
+        break;
+    }
+
     default: {
         include "./view/admin/header_admin.php";
         include "./view/admin/admin_left.php";

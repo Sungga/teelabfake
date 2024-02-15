@@ -89,8 +89,18 @@
                             ?>
                         </div>
                     </div>
-                    <div class="header__right--icon">
-                        <a href="./index.php?controller=website&page=cart" class="fa-solid fa-cart-shopping"></a>
+                    <div class="header__right--icon header__right--user">
+                        <a href="#" class="fa-solid fa-cart-shopping"></a>
+                        <div class="header__right--func">
+                            <a href="./index.php?controller=website&page=cart">Giỏ hàng</a>
+                            <?php
+                            if(isset($_SESSION['user_id'])) {
+                            ?>    
+                                <a href="./index.php?controller=website&page=order">Đơn mua</a>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
